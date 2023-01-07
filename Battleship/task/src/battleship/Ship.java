@@ -19,23 +19,29 @@ public class Ship {
         this.coordinate1 = coordinate1;
         this.coordinate2 = coordinate2;
 
-        this.x1 = Character.getNumericValue(coordinate1.charAt(1));
-        this.x2 = Character.getNumericValue(coordinate2.charAt(1));
+//        int c = Integer.parseInt(coordinate1.substring(1));
+
+        this.x1 = Integer.parseInt(coordinate1.substring(1));
+        this.x2 = Integer.parseInt(coordinate2.substring(1));
 
         this.y1 = new String(alphabet).indexOf(coordinate1.charAt(0));
         this.y2 = new String(alphabet).indexOf(coordinate2.charAt(0));
 
         checkCoordinates();
+
         if (isFinish()) {
-            field.drawTheShip(x1, x2, y1, y2);
+            if (x1 < x2 && y1 < y2) field.drawTheShip(x1, x2, y1, y2);
+            else if (x1 >= x2 && y1 < y2) field.drawTheShip(x2, x1, y1, y2);
+            else if (x1 >= x2) field.drawTheShip(x2, x1, y2, y1);
+            else field.drawTheShip(x1, x2, y2, y1);
         }
     }
 
     public void checkCoordinates() {
         if (x1 == x2) {
-            isFinish = y1 != y2 && y2 - y1 == length - 1;
+            isFinish = y1 != y2 && (y2 - y1 == length - 1 || y1 - y2 == length - 1);
         } else {
-            isFinish = y1 == y2 && x2 - x1 == length - 1;
+            isFinish = y1 == y2 && (x2 - x1 == length - 1 || x1 - x2 == length - 1);
         }
     }
 

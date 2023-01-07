@@ -14,6 +14,9 @@ public class Main {
     public static void fillTheField(Field field) {
         placingShip(field, 5, "Aircraft Carrier");
         placingShip(field, 4, "BattleShip");
+        placingShip(field, 3, "Submarine");
+        placingShip(field, 3, "Cruiser");
+        placingShip(field, 2, "Destroyer");
     }
 
     public static void placingShip(Field field, int length, String name) {
