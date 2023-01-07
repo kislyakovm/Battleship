@@ -7,21 +7,26 @@ public class Main {
     public static void main(String[] args) {
         Field field = new Field();
 
-        placingShips(field);
+        fillTheField(field);
 
     }
 
-    public static void placingShips(Field field) {
+    public static void fillTheField(Field field) {
+        placingShip(field, 5, "Aircraft Carrier");
+        placingShip(field, 4, "BattleShip");
+    }
+
+    public static void placingShip(Field field, int length, String name) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the coordinates of the Aircraft Carrier (5 cells):");
+        System.out.println("Enter the coordinates of the " +  name + " (" + length + " cells):");
         System.out.println();
 
         while (true) {
             String coordinate1 = scanner.next();
             String coordinate2 = scanner.next();
 
-            Ship aircraftCarrier = new Ship(5, coordinate1, coordinate2, field);
-            if (!aircraftCarrier.isFinish()) {
+            Ship ship = new Ship(length, coordinate1, coordinate2, field);
+            if (!ship.isFinish()) {
                 System.out.println("Error! Wrong length of the Submarine! Try again:");
                 System.out.println();
             } else {
@@ -30,7 +35,6 @@ public class Main {
                 break;
             }
         }
-
     }
 }
 
