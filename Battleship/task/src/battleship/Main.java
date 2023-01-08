@@ -7,6 +7,43 @@ public class Main {
     public static void main(String[] args) {
         Field field = new Field();
         fillTheField(field);
+
+
+        System.out.println("The game starts!");
+        System.out.println();
+        field.showTheField(field.getField());
+
+        while (true) {
+            if(takeAShot(field)) {
+                break;
+            }
+        }
+    }
+
+    public static boolean takeAShot(Field field) {
+        Scanner scanner = new Scanner(System.in);
+        char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+
+        System.out.println("Take a shot!");
+        System.out.println();
+
+        String shotCoordinate = scanner.next();
+
+
+
+        for (char i : alphabet) {
+            if (i == shotCoordinate.charAt(0)) {
+                int r = new String(alphabet).indexOf(shotCoordinate.charAt(0));
+                int c = Integer.parseInt(shotCoordinate.substring(1)) - 1;
+                if (c < 10) {
+                    field.checkAShot(r, c);
+                    field.showTheField(field.getField());
+                    return true;
+                }
+            }
+        }
+        System.out.println("Error! You entered the wrong coordinates! Try again:");
+        return false;
     }
 
     public static void fillTheField(Field field) {
@@ -32,7 +69,7 @@ public class Main {
                 System.out.println();
             } else {
                 System.out.println();
-                Field.showTheField(field.getField());
+                field.showTheField(field.getField());
                 break;
             }
         }

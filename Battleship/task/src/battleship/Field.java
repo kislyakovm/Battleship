@@ -22,7 +22,7 @@ public class Field {
         }
     }
 
-    public static void showTheField(char[][] field) {
+    public void showTheField(char[][] field) {
         System.out.print(" ");
 
         for (int k = 1; k < 11; k++) System.out.print(" " + k);
@@ -36,6 +36,18 @@ public class Field {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public void checkAShot(int r, int c) {
+        if(field[r][c] == 'O') {
+            field[r][c] = 'X';
+            System.out.println("You hit a ship!");
+            System.out.println();
+        } else if (field[r][c] == '~') {
+            field[r][c] = 'M';
+            System.out.println("You missed!");
+            System.out.println();
+        }
     }
 
     public boolean horizontalDrawShip(int r1, int r2, int c1, int c2) {
