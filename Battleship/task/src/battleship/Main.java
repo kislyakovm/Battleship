@@ -6,9 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         Field field = new Field();
-
         fillTheField(field);
-
     }
 
     public static void fillTheField(Field field) {

@@ -4,8 +4,8 @@ public class Ship {
     int length;
     String coordinate1;
     String coordinate2;
-    int x1, y1;
-    int x2, y2;
+    int r1, c1;
+    int r2, c2;
     private boolean isFinish;
 
     public boolean isFinish() {
@@ -19,29 +19,26 @@ public class Ship {
         this.coordinate1 = coordinate1;
         this.coordinate2 = coordinate2;
 
-//        int c = Integer.parseInt(coordinate1.substring(1));
+        this.r1 = new String(alphabet).indexOf(coordinate1.charAt(0));
+        this.r2 = new String(alphabet).indexOf(coordinate2.charAt(0));
 
-        this.x1 = Integer.parseInt(coordinate1.substring(1));
-        this.x2 = Integer.parseInt(coordinate2.substring(1));
-
-        this.y1 = new String(alphabet).indexOf(coordinate1.charAt(0));
-        this.y2 = new String(alphabet).indexOf(coordinate2.charAt(0));
-
+        this.c1 = Integer.parseInt(coordinate1.substring(1)) - 1;
+        this.c2 = Integer.parseInt(coordinate2.substring(1)) - 1;
         checkCoordinates();
 
         if (isFinish()) {
-            if (x1 < x2 && y1 < y2) field.drawTheShip(x1, x2, y1, y2);
-            else if (x1 >= x2 && y1 < y2) field.drawTheShip(x2, x1, y1, y2);
-            else if (x1 >= x2) field.drawTheShip(x2, x1, y2, y1);
-            else field.drawTheShip(x1, x2, y2, y1);
+            if(!field.drawTheShip2(Math.min(r1, r2), Math.max(r1, r2), Math.min(c1, c2), Math.max(c1, c2))) {
+                isFinish = false;
+//                System.out.println("Error! You placed it too close to another one. Try again:");
+            }
         }
     }
 
     public void checkCoordinates() {
-        if (x1 == x2) {
-            isFinish = y1 != y2 && (y2 - y1 == length - 1 || y1 - y2 == length - 1);
+        if (c1 == c2) {
+            isFinish = r1 != r2 && (Math.abs(r2 - r1) == length - 1);
         } else {
-            isFinish = y1 == y2 && (x2 - x1 == length - 1 || x1 - x2 == length - 1);
+            isFinish = r1 == r2 && (Math.abs(c2 - c1) == length - 1);
         }
     }
 
