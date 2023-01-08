@@ -65,21 +65,21 @@ public class Field {
         } else if (c2 == 9) {
             if (r1 == 0) {
                 // right up
-                for (int i = c1 - 1; i < c2; i++) {
+                for (int i = c1 - 1; i <= c2; i++) {
                     if (field[r1][i] == 'O' || field[r1 + 1][i] == 'O') {
                         return false;
                     }
                 }
             } else if (r2 == 9){
                 // right down
-                for (int i = c1 - 1; i < c2; i++) {
+                for (int i = c1 - 1; i <= c2; i++) {
                     if (field[r1][i] == 'O' || field[r1 - 1][i] == 'O') {
                         return false;
                     }
                 }
             } else {
                 // right
-                for (int i = c1; i < c2; i++) {
+                for (int i = c1; i <= c2; i++) {
                     if (field[r1][i] == 'O' || field[r1 - 1][i] == 'O' || field[r1 + 1][i] == 'O') {
                         return false;
                     }
