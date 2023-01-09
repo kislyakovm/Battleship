@@ -3,14 +3,20 @@ package battleship;
 public class Field {
 
     char[][] field = new char[10][10];
+    char[][] fogField = new char[10][10];
     static char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
     public char[][] getField() {
         return field;
     }
 
+    public char[][] getFogField() {
+        return fogField;
+    }
+
     public Field() {
         formingEmptyField(field);
+        formingEmptyField(fogField);
         showTheField(field);
     }
 
@@ -41,10 +47,14 @@ public class Field {
     public void checkAShot(int r, int c) {
         if(field[r][c] == 'O') {
             field[r][c] = 'X';
+            fogField[r][c] = 'X';
+
             System.out.println("You hit a ship!");
             System.out.println();
         } else if (field[r][c] == '~') {
             field[r][c] = 'M';
+            fogField[r][c] = 'M';
+
             System.out.println("You missed!");
             System.out.println();
         }

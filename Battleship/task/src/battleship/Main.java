@@ -11,10 +11,10 @@ public class Main {
 
         System.out.println("The game starts!");
         System.out.println();
-        field.showTheField(field.getField());
+        field.showTheField(field.getFogField());
 
         while (true) {
-            if(takeAShot(field)) {
+            if (takeAShot(field)) {
                 break;
             }
         }
