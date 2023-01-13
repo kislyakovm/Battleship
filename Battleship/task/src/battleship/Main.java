@@ -8,14 +8,15 @@ public class Main {
         Field field = new Field();
         fillTheField(field);
 
-
         System.out.println("The game starts!");
         System.out.println();
         field.showTheField(field.getFogField());
 
         while (true) {
-            if (takeAShot(field)) {
-                break;
+            while (true) {
+                if (takeAShot(field)) {
+                    break;
+                }
             }
         }
     }
@@ -26,9 +27,7 @@ public class Main {
 
         System.out.println("Take a shot!");
         System.out.println();
-
         String shotCoordinate = scanner.next();
-
 
 
         for (char i : alphabet) {
@@ -37,7 +36,7 @@ public class Main {
                 int c = Integer.parseInt(shotCoordinate.substring(1)) - 1;
                 if (c < 10) {
                     field.checkAShot(r, c);
-                    field.showTheField(field.getField());
+                    field.showTheField(field.getFogField());
                     return true;
                 }
             }

@@ -29,7 +29,6 @@ public class Ship {
         if (isFinish()) {
             if(!field.drawTheShip2(Math.min(r1, r2), Math.max(r1, r2), Math.min(c1, c2), Math.max(c1, c2))) {
                 isFinish = false;
-//                System.out.println("Error! You placed it too close to another one. Try again:");
             }
         }
     }

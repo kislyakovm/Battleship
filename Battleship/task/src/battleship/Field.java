@@ -2,6 +2,7 @@ package battleship;
 
 public class Field {
 
+    int shotCount = 17;
     char[][] field = new char[10][10];
     char[][] fogField = new char[10][10];
     static char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
@@ -49,16 +50,45 @@ public class Field {
             field[r][c] = 'X';
             fogField[r][c] = 'X';
 
-            System.out.println("You hit a ship!");
+            shotCount--;
+            if (shotCount == 0) {
+                showTheField(getFogField());
+                System.out.println("You sank the last ship. You won. Congratulations!");
+                System.exit(0);
+            }
+            System.out.println("You hit a ship! Try again:");
             System.out.println();
         } else if (field[r][c] == '~') {
             field[r][c] = 'M';
             fogField[r][c] = 'M';
 
-            System.out.println("You missed!");
+            System.out.println("You missed! Try again:");
             System.out.println();
         }
     }
+
+//    public boolean isShipSunk(char[][] field, int r, int c) {
+//        if (r == 0) {
+//            if (c == 0) {
+//                if (field[r][c + 1] != 'O' && field[r + 1][c] != 'O') return true;
+//            }
+//        } else if (r == 9) {
+//
+//        } else {
+//
+//        }
+//    }
+
+
+    public boolean isTheEndOfTheGame(char[][] field) {
+        for (int i = 0; i <= 10; i++) {
+            for (char c: field[i]) {
+                if (c == 'O') return false;
+            }
+        }
+        return true;
+    }
+
 
     public boolean horizontalDrawShip(int r1, int r2, int c1, int c2) {
         if (c1 == 0) {
