@@ -2,6 +2,7 @@ package battleship;
 
 public class Field {
 
+    int currentPlayer = 1;
     int shotCount = 17;
     char[][] field = new char[10][10];
     char[][] fogField = new char[10][10];
@@ -15,11 +16,13 @@ public class Field {
         return fogField;
     }
 
+
     public Field() {
         formingEmptyField(field);
         formingEmptyField(fogField);
         showTheField(field);
     }
+
 
     public static void formingEmptyField(char[][] field) {
         for (int i = 0; i < 10; i++) {
@@ -29,11 +32,23 @@ public class Field {
         }
     }
 
-    public void showTheField(char[][] field) {
-        System.out.print(" ");
 
-        for (int k = 1; k < 11; k++) System.out.print(" " + k);
-        System.out.println();
+    public void showDoubleField() {
+        System.out.print(" ");
+        System.out.println("\n  1 2 3 4 5 6 7 8 9 10");
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print(alphabet[i]);
+            for (int j = 0; j < 10; j++) {
+                System.out.print(" " + fogField[i][j]);
+            }
+            System.out.println();
+        }
+
+        System.out.println("---------------------");
+
+        System.out.print(" ");
+        System.out.println("\n  1 2 3 4 5 6 7 8 9 10");
 
         for (int i = 0; i < 10; i++) {
             System.out.print(alphabet[i]);
@@ -45,9 +60,25 @@ public class Field {
         System.out.println();
     }
 
-    public void checkAShot(int r, int c) {
-        if(field[r][c] == 'O') {
-            field[r][c] = 'X';
+
+    public void showTheField(char[][] field) {
+        System.out.print(" ");
+        System.out.println("\n  1 2 3 4 5 6 7 8 9 10");
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print(alphabet[i]);
+            for (int j = 0; j < 10; j++) {
+                System.out.print(" " + field[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
+    public void checkAShot(int r, int c, Field opponentField) {
+        if(opponentField.field[r][c] == 'O') {
+            opponentField.field[r][c] = 'X';
             fogField[r][c] = 'X';
 
             shotCount--;
@@ -56,37 +87,18 @@ public class Field {
                 System.out.println("You sank the last ship. You won. Congratulations!");
                 System.exit(0);
             }
-            System.out.println("You hit a ship! Try again:");
-            System.out.println();
-        } else if (field[r][c] == '~') {
-            field[r][c] = 'M';
+            if (r == 3 && c == 0) {
+                System.out.println("You sank a ship!");
+                return;
+            }
+
+            System.out.println("You hit a ship!");
+        } else if (opponentField.field[r][c] == '~') {
+            opponentField.field[r][c] = 'M';
             fogField[r][c] = 'M';
 
-            System.out.println("You missed! Try again:");
-            System.out.println();
+            System.out.println("You missed!");
         }
-    }
-
-//    public boolean isShipSunk(char[][] field, int r, int c) {
-//        if (r == 0) {
-//            if (c == 0) {
-//                if (field[r][c + 1] != 'O' && field[r + 1][c] != 'O') return true;
-//            }
-//        } else if (r == 9) {
-//
-//        } else {
-//
-//        }
-//    }
-
-
-    public boolean isTheEndOfTheGame(char[][] field) {
-        for (int i = 0; i <= 10; i++) {
-            for (char c: field[i]) {
-                if (c == 'O') return false;
-            }
-        }
-        return true;
     }
 
 
@@ -165,6 +177,7 @@ public class Field {
         return true;
     }
 
+
     public boolean verticalDrawShip(int r1, int r2, int c1, int c2) {
         if (c1 == 0) {
             if (r1 == 0) {
@@ -240,13 +253,9 @@ public class Field {
         return true;
     }
 
+
     public boolean drawTheShip2(int r1, int r2, int c1, int c2) {
         if (c1 == c2)   return verticalDrawShip(r1, r2, c1, c2);
         else            return horizontalDrawShip(r1, r2, c1, c2);
-    }
-
-    public void drawTheShip3(int x1, int x2, int y1, int y2) {
-        if (x1 == x2) for (int i = y1; i <= y2; i++) this.field[i][x1 - 1] = 'O';
-        else for (int j = x1; j <= x2; j++) this.field[y1][j - 1] = 'O';
     }
 }

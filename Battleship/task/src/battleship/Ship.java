@@ -40,6 +40,4 @@ public class Ship {
             isFinish = r1 == r2 && (Math.abs(c2 - c1) == length - 1);
         }
     }
-
-
 }
